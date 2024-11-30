@@ -13,6 +13,8 @@ import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
+import { Color } from "@tiptap/extension-color";
+import Highlight from "@tiptap/extension-highlight";
 
 import { useEditorStore } from "@/store/use-editor-store";
 
@@ -53,6 +55,8 @@ export const Editor = () => {
         extensions: [
             StarterKit,
             FontFamily,
+            Highlight.configure({ multicolor: true }),
+            Color,
             TextStyle,
             Underline,
             Image,

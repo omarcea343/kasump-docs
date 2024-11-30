@@ -6,6 +6,7 @@ import { useEditorStore } from "@/store/use-editor-store";
 import {
     BoldIcon,
     ChevronDownIcon,
+    Highlighter,
     ItalicIcon,
     ListTodoIcon,
     LucideIcon,
@@ -23,6 +24,99 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { type Level } from "@tiptap/extension-heading";
+import { type ColorResult, TwitterPicker } from "react-color";
+
+const HighlightColorButton = () => {
+    const { editor } = useEditorStore();
+
+    const value = editor?.getAttributes("highlight").color || "#FFFFFF";
+
+    const onChange = (color: ColorResult) => {
+        editor?.chain().setHighlight({ color: color.hex }).run();
+    };
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+                    <Highlighter className="size-4" />
+                    <div className="h-0.5 w-full" style={{ backgroundColor: value }} />
+                </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="p-0">
+                <TwitterPicker
+                    color={value}
+                    onChange={onChange}
+                    colors={[
+                        "#000000",
+                        "#795548",
+                        "#607d8b",
+                        "#2196f3",
+                        "#3f51b5",
+                        "#009688",
+                        "#4caf50",
+                        "#00D084",
+                        "#ffeb3b",
+                        "#ffc107",
+                        "#FCB900",
+                        "#673ab7",
+                        "#FF6900",
+                        "#FF9800",
+                        "#EB144C",
+                        "#F78DA7",
+                        "#FFFFFF",
+                    ]}
+                />
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
+
+const TextColorButton = () => {
+    const { editor } = useEditorStore();
+
+    const value = editor?.getAttributes("textStyle").color || "#000000";
+
+    const onChange = (color: ColorResult) => {
+        editor?.chain().setColor(color.hex).run();
+    };
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <button className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+                    <span className="text-xs">A</span>
+                    <div className="h-0.5 w-full" style={{ backgroundColor: value }} />
+                </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="p-0">
+                <TwitterPicker
+                    color={value}
+                    onChange={onChange}
+                    colors={[
+                        "#000000",
+                        "#795548",
+                        "#607d8b",
+                        "#2196f3",
+                        "#3f51b5",
+                        "#009688",
+                        "#4caf50",
+                        "#00D084",
+                        "#ffeb3b",
+                        "#ffc107",
+                        "#FCB900",
+                        "#673ab7",
+                        "#FF6900",
+                        "#FF9800",
+                        "#EB144C",
+                        "#F78DA7",
+                        "#FFFFFF",
+                    ]}
+                />
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
 
 const HeadingLevelButton = () => {
     const { editor } = useEditorStore();
@@ -231,8 +325,8 @@ export const Toolbar = () => {
             {sections[1].map((item) => (
                 <ToolbarButton key={item.label} {...item} />
             ))}
-            {/* TODO: Text color */}
-            {/* TODO: Highlight color */}
+            <TextColorButton />
+            <HighlightColorButton />
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
             {/* TODO: Link */}
             {/* TODO: Image */}
