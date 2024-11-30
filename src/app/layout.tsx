@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Kasumo Docs",
-    description: "Collaborative document editing",
+    title: "Kasump Docs",
+    description: "Collaborative document editing.",
 };
 
 export default function RootLayout({
