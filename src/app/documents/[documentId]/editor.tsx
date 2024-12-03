@@ -59,10 +59,7 @@ export const Editor = () => {
         extensions: [
             StarterKit,
             FontSizeExtension,
-            LineHeightExtension.configure({
-                types: ["heading", "paragraph"],
-                defaultLineHeight: "normal",
-            }),
+            LineHeightExtension,
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
