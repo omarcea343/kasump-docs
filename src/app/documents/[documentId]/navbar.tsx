@@ -39,7 +39,3 @@ export const Navbar = () => {
         </nav>
     );
 };
-
-{
-    /* TIME: 4:06:46 */
-}
